@@ -1,22 +1,9 @@
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
+const app = require('./app')
 
-const Datastore = require('nedb')
-const schedule = require('node-schedule')
-const fetch = require('node-fetch')
+const port = process.env.PORT || 5000
 
-db = new Datastore({ filename: 'status.db' })
-db.loadDatabase((err) => console.error(err))
-
-function checkEnt() {
-  fetch('https://ent.insa-cvl.fr/')
-    .then((res) => {
-      db.insert({ status: res.status, date: new Date() }, (err) => {
-        if (err) {
-          console.error(err)
-        }
-      })
-    })
-    .catch((err) => console.log(err))
-}
-
-schedule.scheduleJob('*/5 * * * *', checkEnt)
+app.listen(port, () => {
+  /* eslint-disable no-console */
+  console.log(`Listening: http://localhost:${port}`)
+  /* eslint-enable no-console */
+})
