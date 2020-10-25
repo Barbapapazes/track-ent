@@ -1,6 +1,6 @@
 var ctx = document.getElementById('chart').getContext('2d')
 
-fetch('/data', { mode: 'cors' })
+fetch('/api/status', { mode: 'cors' })
   .then((res) => res.json())
   .then((data) => {
     drawChart(data)
