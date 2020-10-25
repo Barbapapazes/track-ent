@@ -1,14 +1,22 @@
 var ctx = document.getElementById('chart').getContext('2d')
 
-fetch('/data')
+fetch('/data', { mode: 'cors' })
   .then((res) => res.json())
   .then((data) => {
     drawChart(data)
   })
 
 function drawChart(data) {
-  const dates = data.map((obj) => obj.date)
-  const status = data.map((obj) => obj.status)
+  sortData = data.sort((obj1, obj2) => {
+    console.log(obj1.date > obj2.date)
+    if (obj1.date > obj2.date) return 1
+    else return -1
+  })
+  const dates = sortData.map((obj) => {
+    const date = new Date(obj.date)
+    return date.toLocaleString()
+  })
+  const status = sortData.map((obj) => obj.status)
   const colors = status.map((value) => {
     if (value === 200) {
       return 'rgb(0, 255, 0)'
@@ -17,9 +25,7 @@ function drawChart(data) {
     }
   })
 
-  console.log(dates.length, status.length, colors.length)
-
-  console.log(dates)
+  console.log(sortData)
 
   const chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -43,6 +49,10 @@ function drawChart(data) {
     },
 
     // Configuration options go here
-    options: {},
+    options: {
+      scales: {
+        xAxes: [{}],
+      },
+    },
   })
 }
