@@ -8,7 +8,6 @@ fetch('/data', { mode: 'cors' })
 
 function drawChart(data) {
   sortData = data.sort((obj1, obj2) => {
-    console.log(obj1.date > obj2.date)
     if (obj1.date > obj2.date) return 1
     else return -1
   })
@@ -24,8 +23,6 @@ function drawChart(data) {
       return 'rgb(255, 0, 0)'
     }
   })
-
-  console.log(sortData)
 
   const chart = new Chart(ctx, {
     // The type of chart we want to create
