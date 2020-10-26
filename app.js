@@ -5,8 +5,6 @@ const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const logger = require('morgan')
-const helmet = require('helmet')
-const cors = require('cors')
 const Datastore = require('nedb')
 const schedule = require('node-schedule')
 const fetch = require('node-fetch')
@@ -15,7 +13,11 @@ const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
 const scheduled = require('./utils/scheduled')
 
-db = new Datastore({ filename: 'status.db' })
+const filename =
+  process.env.NODE_ENV === 'production'
+    ? path.join('/', 'data', 'status.db')
+    : 'data/status.db'
+db = new Datastore({ filename })
 db.loadDatabase((err) => console.error(err))
 
 const app = express()
