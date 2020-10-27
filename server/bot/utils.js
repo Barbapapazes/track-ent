@@ -1,10 +1,14 @@
 const Twitter = require('../bot')
 
 exports.tweet = function (text) {
-  Twitter.post('statuses/update', { status: text }, function (err) {
-    if (err) {
-      console.error(err)
-      return
-    }
-  })
+  if (process.env.NODE_ENV === 'production') {
+    Twitter.post('statuses/update', { status: text }, function (err) {
+      if (err) {
+        console.error(err)
+        return
+      }
+    })
+  } else {
+    console.debug(text)
+  }
 }

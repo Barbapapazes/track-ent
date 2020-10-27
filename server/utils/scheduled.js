@@ -36,3 +36,6 @@ function createText(status) {
   })}`
   return text
 }
+
+exports.cron =
+  process.env.NODE_ENV === 'production' ? '*/5 * * * *' : '*/10 * * * * *'
