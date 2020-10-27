@@ -3,7 +3,8 @@ services:
   backend:
     build: ./server
     ports:
-      - 5000:3000
+      - 5000:5000
+    env_file: ./server/.env
     volumes:
       - track-ent-data:/data
   front:
