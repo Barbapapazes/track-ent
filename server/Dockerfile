@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:12-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -12,7 +12,5 @@ RUN npm ci --only=production
 COPY . .
 
 EXPOSE 3000
-
-ENV NODE_ENV=production
 
 CMD ["npm", "run", "start"]
