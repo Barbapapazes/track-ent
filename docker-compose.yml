@@ -11,6 +11,7 @@ services:
     build: ./client
     ports: 
       - 3000:3000
+    env_file: ./client/.env
 volumes:
   track-ent-data:
     name: track-ent-data

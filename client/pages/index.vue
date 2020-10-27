@@ -16,7 +16,6 @@
 export default {
   async fetch() {
     const { apiUrl } = this.$config
-    console.log(apiUrl)
     const data = await this.$axios.$get(`http://${apiUrl}/api/status`)
     this.data = data.sort((obj1, obj2) => {
       if (obj1.date > obj2.date) return 1
