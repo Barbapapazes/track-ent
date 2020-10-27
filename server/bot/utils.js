@@ -1,4 +1,5 @@
-const Twitter = require('../bot')
+let Twitter = undefined
+if (process.env.NODE_ENV === 'production') Twitter = require('../bot')
 
 exports.tweet = function (text) {
   if (process.env.NODE_ENV === 'production') {
