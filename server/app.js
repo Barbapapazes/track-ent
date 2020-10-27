@@ -7,21 +7,11 @@ const createError = require('http-errors')
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-const Datastore = require('nedb')
 const schedule = require('node-schedule')
-const fetch = require('node-fetch')
-const Twitter = require('./bot')
 
 const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
 const scheduled = require('./utils/scheduled')
-
-const filename =
-  process.env.NODE_ENV === 'production'
-    ? path.join('/', 'data', 'status.db')
-    : 'data/status.db'
-db = new Datastore({ filename })
-db.loadDatabase((err) => console.error(err))
 
 const app = express()
 
@@ -35,7 +25,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-schedule.scheduleJob(scheduled.cron, scheduled.checkEnt)
+const services = ['ent', 'cas', 'celene']
+services.forEach((service) => {
+  schedule.scheduleJob(scheduled.cron, scheduled.checkService(service))
+})
 
 app.use('/', indexRouter)
 app.use('/api', apiRouter)
