@@ -1,0 +1,15 @@
+version: "3.8"
+services: 
+  backend:
+    build: ./server
+    ports:
+      - 5000:3000
+    volumes:
+      - track-ent-data:/data
+  front:
+    build: ./client
+    ports: 
+      - 3000:3000
+volumes:
+  track-ent-data:
+    name: track-ent-data
