@@ -10,6 +10,7 @@ const cors = require('cors')
 const Datastore = require('nedb')
 const schedule = require('node-schedule')
 const fetch = require('node-fetch')
+const Twitter = require('./bot')
 
 const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
@@ -34,7 +35,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-schedule.scheduleJob('*/5 * * * *', scheduled.checkEnt)
+schedule.scheduleJob('*/5 * * * * *', scheduled.checkEnt)
 
 app.use('/', indexRouter)
 app.use('/api', apiRouter)
