@@ -1,5 +1,29 @@
 {
-  "name": "client",
+  "name": "track-ent-client",
+  "description": "Tracker pour visualiser l'état des services de l'ENT",
+  "homepage": "https://github.com/Barbapapazes/track-ent/tree/master/client",
+  "keywords": [
+    "web",
+    "nuxtjs",
+    "tacker",
+    "dashboard"
+  ],
+  "author": {
+    "name": "Esteban S",
+    "email": "esteban.soubiran@insa-cvl.fr"
+  },
+  "repository": {
+    "url": "https://github.com/Barbapapazes/track-ent/",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/Barbapapazes/track-ent/issues",
+    "email": "esteban.soubiran@insa-cvl.fr"
+  },
+  "engines": {
+    "node": "^12.0.0",
+    "npm": ">= 3.0.0"
+  },
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,10 +32,12 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "npm run lint:js"
+    "lint": "npm run lint:js",
+    "patch": "npm version patch",
+    "minor": "npm version minor"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint"
+    "*.{js,vue}": "npm run lint:js"
   },
   "husky": {
     "hooks": {
