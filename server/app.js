@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 const services = ['ent', 'cas', 'celene']
 services.forEach((service) => {
   schedule.scheduleJob(scheduled.cron, scheduled.checkService(service))
+  schedule.scheduleJob(scheduled.cronWeek, scheduled.sumUpWeek(service))
 })
 
 app.use('/', indexRouter)
