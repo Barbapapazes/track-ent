@@ -1,5 +1,6 @@
 const dayjs = require('dayjs')
-const { dbs, services } = require('../database')
+const async = require('async')
+const { dbs } = require('../database')
 
 exports.createText = function (service, status) {
   let text = ''
@@ -15,15 +16,24 @@ exports.createText = function (service, status) {
   return text
 }
 
-exports.calculationUpTime = function (service, cb) {
-  const date = dayjs().subtract(7, 'day')
+function findInDatastore(service, date, callback) {
   dbs[service].find({ date: { $gte: date } }, function (err, docs) {
     if (err) {
-      console.error(err)
+      callback(err, null)
     } else {
-      const up = docs.filter((obj) => obj.status === 200)
-      const upTime = (up.length * 100) / docs.length
-      cb(upTime, service)
+      callback(null, docs)
     }
   })
+}
+
+exports.calculationUpTimes = function (time, cb) {
+  const date = dayjs().subtract(time, 'day')
+  async.parallel(
+    {
+      ent: (callback) => findInDatastore('ent', date, callback),
+      celene: (callback) => findInDatastore('celene', date, callback),
+      cas: (callback) => findInDatastore('cas', date, callback),
+    },
+    cb
+  )
 }

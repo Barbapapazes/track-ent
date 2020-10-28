@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.2.0",
     "cors": "^2.8.5",
     "dayjs": "^1.9.4",
     "debug": "~2.6.9",

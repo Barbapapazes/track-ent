@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const dayjs = require('dayjs')
-const { createText, calculationUpTime } = require('./index')
+const { createText, calculationUpTimes } = require('./index')
 const { tweet } = require('../bot/utils')
 const { dbs, services } = require('../database')
 
@@ -36,14 +36,24 @@ exports.checkService = function (service) {
   }
 }
 
-exports.sumUpWeek = function (service) {
+exports.sumUp = function (time) {
   return function () {
-    calculationUpTime(service, function (upTime, service) {
-      const startDate = dayjs().subtract(7, 'day').format('DD/MM/YYYY')
+    calculationUpTimes(time, function (err, results) {
+      if (err) {
+        console.error(err)
+      }
+      const startDate = dayjs().subtract(time, 'day').format('DD/MM/YYYY')
       const endDate = dayjs().format('DD/MM/YYYY')
-      tweet(
-        `Le up-time de ${service.toUpperCase()} est de ${upTime}% cette dernière semaine, du ${startDate} au ${endDate} ! 📊`
-      )
+      let text = `Uptime du ${startDate} au ${endDate} 📊 \n\n`
+      services.forEach((service) => {
+        const all = results[service].length
+        const up = results[service].filter((result) => result.status === 200)
+          .length
+        text += `  - ${service.toUpperCase()}: ${Math.round(
+          (up * 100) / all
+        )} % \n`
+      })
+      tweet(text)
     })
   }
 }
@@ -52,4 +62,7 @@ exports.cron =
   process.env.NODE_ENV === 'production' ? '*/5 * * * *' : '*/10 * * * * *'
 
 exports.cronWeek =
-  process.env.NODE_ENV === 'production' ? '* 10 * * * 0' : '*/5 * * * * *'
+  process.env.NODE_ENV === 'production' ? '* 10 * * 6' : '*/5 * * * * *'
+
+exports.cronMonth =
+  process.env.NODE_ENV === 'production' ? '* 10 1 * *' : '*/5 * * * * *'
