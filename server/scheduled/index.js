@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const dayjs = require('dayjs')
-const { createText, calculationUpTimes } = require('./index')
+const { createText, calculationUpTimes } = require('../utils/index')
 const { tweet } = require('../bot/utils')
 const { dbs, services } = require('../database')
 
@@ -62,7 +62,7 @@ exports.cron =
   process.env.NODE_ENV === 'production' ? '*/5 * * * *' : '*/10 * * * * *'
 
 exports.cronWeek =
-  process.env.NODE_ENV === 'production' ? '* 10 * * 6' : '*/5 * * * * *'
+  process.env.NODE_ENV === 'production' ? '* 10 * * 6' : '*/20 * * * * *'
 
 exports.cronMonth =
-  process.env.NODE_ENV === 'production' ? '* 10 1 * *' : '*/5 * * * * *'
+  process.env.NODE_ENV === 'production' ? '* 10 1 * *' : '*/30 * * * * *'

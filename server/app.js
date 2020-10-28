@@ -11,7 +11,8 @@ const schedule = require('node-schedule')
 
 const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
-const scheduled = require('./utils/scheduled')
+const Twitter = require('./bot')
+const scheduled = require('./scheduled')
 
 const app = express()
 

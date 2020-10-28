@@ -4,7 +4,7 @@
 
 ## Build Setup
 
-### Exigence
+### Exigences
 
 - [Node](https://nodejs.org/)
 - [Docker](https://www.docker.com/)

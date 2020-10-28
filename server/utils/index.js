@@ -4,15 +4,13 @@ const { dbs } = require('../database')
 
 exports.createText = function (service, status) {
   let text = ''
-  const date = new Date()
+  const date = dayjs()
   if (status === 200) {
     text = `${service.toUpperCase()} est fonctionnelle ! 🚀`
   } else {
     text = `${service.toUpperCase()} a un problème ! 🐛`
   }
-  text += `\n\nStatut ${status} à ${date.toLocaleString('fr-FR', {
-    timeZone: 'UTC',
-  })}`
+  text += `\n\nStatut ${status} ${date.format('à H:mm le DD/MM/YYYY')}`
   return text
 }
 

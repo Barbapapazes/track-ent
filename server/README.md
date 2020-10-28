@@ -6,7 +6,7 @@ Le serveur effectue la capture du statut des services en utilisant une requête 
 
 ## Build Setup
 
-### Exigence
+### Exigences
 
 - [Node](https://nodejs.org/)
 - [Docker](https://www.docker.com/)
