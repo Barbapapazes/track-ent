@@ -2,12 +2,11 @@ const request = require('request')
 const util = require('util')
 const dayjs = require('dayjs')
 
-const Twitter = require('../bot')
 const { dbs, services } = require('../database')
 
 const post = util.promisify(request.post)
 
-exports.tweet = function (text) {
+exports.tweet = function (Twitter, text) {
   if (process.env.NODE_ENV === 'production') {
     Twitter.post('statuses/update', { status: text }, function (err) {
       if (err) {

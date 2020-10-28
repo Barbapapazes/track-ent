@@ -1,5 +1,6 @@
 const dayjs = require('dayjs')
 const async = require('async')
+const { Twitter } = require('../bot')
 const { dbs } = require('../database')
 
 exports.createText = function (service, status) {

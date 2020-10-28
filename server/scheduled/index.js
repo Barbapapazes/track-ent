@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const dayjs = require('dayjs')
 const { createText, calculationUpTimes } = require('../utils/index')
+const { Twitter } = require('../bot')
 const { tweet } = require('../bot/utils')
 const { dbs, services } = require('../database')
 
@@ -23,10 +24,10 @@ exports.checkService = function (service) {
             } else {
               if (!lastStatus[service]) {
                 lastStatus[service] = doc.status
-                tweet(createText(service, doc.status))
+                tweet(Twitter, createText(service, doc.status))
               } else if (doc.status !== lastStatus[service]) {
                 lastStatus[service] = doc.status
-                tweet(createText(service, doc.status))
+                tweet(Twitter, createText(service, doc.status))
               }
             }
           }
@@ -53,7 +54,7 @@ exports.sumUp = function (time) {
           (up * 100) / all
         )} % \n`
       })
-      tweet(text)
+      tweet(Twitter, text)
     })
   }
 }

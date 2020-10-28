@@ -50,4 +50,4 @@ const Twitter = new Twit({
   }
 })()
 
-module.exports = Twitter
+exports.Twitter = Twitter
