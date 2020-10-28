@@ -10,6 +10,10 @@
 - [Docker](https://www.docker.com/)
 - [Compose](https://docs.docker.com/compose/)
 
+### Env
+
+Copier le fichier `.env.local` et le renommer `.env`. Mettre l'URL de votre serveur en production ! Cette URL n'est utilisée que lorsque le client est mise en production
+
 ### Utilisation manuelle
 
 ```bash
