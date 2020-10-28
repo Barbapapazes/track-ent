@@ -1,6 +1,16 @@
-# client
+# Track ENT
+
+> Pour visualiser quand les services de l'ENT sont UP ! 👀
 
 ## Build Setup
+
+### Exigence
+
+- [Node](https://nodejs.org/)
+- [Docker](https://www.docker.com/)
+- [Compose](https://docs.docker.com/compose/)
+
+### Utilisation manuelle
 
 ```bash
 # install dependencies
@@ -17,4 +27,6 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+### Utilisation de docker
+
+Afin de créer au mieux le container, il est préférable d'utiliser `compose` pour créer le client et le server !
