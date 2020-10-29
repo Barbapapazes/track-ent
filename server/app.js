@@ -26,6 +26,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Start all scheduled jobs
 const services = ['ent', 'cas', 'celene']
 services.forEach((service) => {
   schedule.scheduleJob(scheduled.cron, scheduled.checkService(service))

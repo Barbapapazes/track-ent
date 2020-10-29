@@ -6,6 +6,11 @@ const { dbs, services } = require('../database')
 
 const post = util.promisify(request.post)
 
+/**
+ * Function to create a tweet
+ * @param {twit} Twitter API to help
+ * @param {string} text to tweet
+ */
 exports.tweet = function (Twitter, text) {
   if (process.env.NODE_ENV === 'production') {
     Twitter.post('statuses/update', { status: text }, function (err) {
@@ -19,6 +24,11 @@ exports.tweet = function (Twitter, text) {
   }
 }
 
+/**
+ * Respond to a DM
+ * @param {object} event
+ * @param {object} oauth
+ */
 exports.sendResponse = async function (event, oauth) {
   // Only react to direct messages
   if (!event.direct_message_events) {
@@ -101,6 +111,12 @@ exports.sendResponse = async function (event, oauth) {
   }
 }
 
+/**
+ * Send a DM
+ * @param {object} messageReceived
+ * @param {string} textToSent
+ * @param {object} oAuth
+ */
 async function sendDM(messageReceived, textToSent, oAuth) {
   const requestConfig = {
     url: 'https://api.twitter.com/1.1/direct_messages/events/new.json',
@@ -122,6 +138,12 @@ async function sendDM(messageReceived, textToSent, oAuth) {
   await post(requestConfig)
 }
 
+/**
+ * To show a DM as read
+ * @param {string} messageId
+ * @param {string} senderId
+ * @param {object} auth
+ */
 async function markAsRead(messageId, senderId, auth) {
   const requestConfig = {
     url: 'https://api.twitter.com/1.1/direct_messages/mark_read.json',
@@ -135,6 +157,11 @@ async function markAsRead(messageId, senderId, auth) {
   await post(requestConfig)
 }
 
+/**
+ * To show the 3 dot when the bot is writing
+ * @param {string} senderId
+ * @param {object} auth
+ */
 async function indicateTyping(senderId, auth) {
   const requestConfig = {
     url: 'https://api.twitter.com/1.1/direct_messages/indicate_typing.json',

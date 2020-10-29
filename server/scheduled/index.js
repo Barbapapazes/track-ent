@@ -1,6 +1,10 @@
 const fetch = require('node-fetch')
 const dayjs = require('dayjs')
-const { createText, calculationUpTimes } = require('../utils/index')
+const {
+  createText,
+  calculationUpTimes,
+  findAllDatastores,
+} = require('../utils/index')
 const { Twitter } = require('../bot')
 const { tweet } = require('../bot/utils')
 const { dbs, services } = require('../database')
@@ -12,6 +16,10 @@ services.forEach((service) => {
   lastStatus[service] = undefined
 })
 
+/**
+ * Ping the service, insert the result in the db and tweet it if the status have change
+ * @param {string} service
+ */
 exports.checkService = function (service) {
   return function () {
     fetch(process.env[`${service.toUpperCase()}_URL`])
@@ -37,25 +45,13 @@ exports.checkService = function (service) {
   }
 }
 
+/**
+ * Get the uptime of a service between now and `time` ago
+ * @param {number} time
+ */
 exports.sumUp = function (time) {
   return function () {
-    calculationUpTimes(time, function (err, results) {
-      if (err) {
-        console.error(err)
-      }
-      const startDate = dayjs().subtract(time, 'day').format('DD/MM/YYYY')
-      const endDate = dayjs().format('DD/MM/YYYY')
-      let text = `Uptime du ${startDate} au ${endDate} 📊 \n\n`
-      services.forEach((service) => {
-        const all = results[service].length
-        const up = results[service].filter((result) => result.status === 200)
-          .length
-        text += `  - ${service.toUpperCase()}: ${Math.round(
-          (up * 100) / all
-        )} % \n`
-      })
-      tweet(Twitter, text)
-    })
+    findAllDatastores(time, calculationUpTimes(time))
   }
 }
 

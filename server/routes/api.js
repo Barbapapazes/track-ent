@@ -3,6 +3,7 @@ const router = express.Router()
 
 const { services, dbs } = require('../database')
 
+/* GET all status of a service */
 router.get('/:service', (req, res) => {
   const { service } = req.params
 

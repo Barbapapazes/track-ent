@@ -8,6 +8,9 @@ const pathdb =
 const services = ['ent', 'cas', 'celene']
 const dbs = {}
 
+/**
+ * Create and start each database
+ */
 services.forEach((service) => {
   dbs[service] = new Datastore({
     filename: path.join(pathdb, `${service}-status.db`),
