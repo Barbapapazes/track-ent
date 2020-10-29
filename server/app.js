@@ -11,8 +11,9 @@ const schedule = require('node-schedule')
 
 const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
-const { Twitter } = require('./bot')
+const { Twitter, startBot } = require('./bot')
 const scheduled = require('./scheduled')
+const { services, dbs } = require('./database')
 
 const app = express()
 
@@ -27,12 +28,16 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Start all scheduled jobs
-const services = ['ent', 'cas', 'celene']
 services.forEach((service) => {
   schedule.scheduleJob(scheduled.cron, scheduled.checkService(service))
 })
 schedule.scheduleJob(scheduled.cronWeek, scheduled.sumUp(7))
 schedule.scheduleJob(scheduled.cronMonth, scheduled.sumUp(30))
+
+// Start the bot
+if (process.env.BOT_DM === 'start') {
+  startBot(services, dbs)
+}
 
 app.use('/', indexRouter)
 app.use('/api', apiRouter)

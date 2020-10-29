@@ -2,8 +2,6 @@ const request = require('request')
 const util = require('util')
 const dayjs = require('dayjs')
 
-const { dbs, services } = require('../database')
-
 const post = util.promisify(request.post)
 
 /**
@@ -29,7 +27,7 @@ exports.tweet = function (Twitter, text) {
  * @param {object} event
  * @param {object} oauth
  */
-exports.sendResponse = async function (event, oauth) {
+exports.sendResponse = async function (event, services, dbs, oauth) {
   // Only react to direct messages
   if (!event.direct_message_events) {
     return
@@ -81,12 +79,12 @@ exports.sendResponse = async function (event, oauth) {
       text +=
         "Besoin d'aide ? Laisse moi tout t'expliquer !😏\n\n!help => obtenir de l'aide\n!statut <service> => obtenir l'état d'un service (cas|celene|ent)"
       await sendDM(message, text, oAuthConfig)
-    } else if (args[0] === 'statut' && services.includes(args[1])) {
+    } else if (args[0] === 'statut' && args[1] && services.includes(args[1])) {
       dbs[args[1]]
         .find({})
         .sort({ date: -1 })
         .limit(1)
-        .exec((err, docs) => {
+        .exec(async (err, docs) => {
           const doc = docs[0]
           if (err) {
             text +=
@@ -102,7 +100,7 @@ exports.sendResponse = async function (event, oauth) {
               'à H:mm le DD/MM/YYYY'
             )} ! 🐛\n\nStatut: ${doc.status} 👀`
           }
-          sendDM(message, text, oAuthConfig)
+          await sendDM(message, text, oAuthConfig)
         })
     } else {
       text += '\n\nJe suis navré mais je ne vous comprends pas ! 😫'
