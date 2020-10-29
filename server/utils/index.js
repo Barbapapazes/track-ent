@@ -9,15 +9,14 @@ const { dbs, services } = require('../database')
  * @param {string} service
  * @param {number} status
  */
-exports.createText = function (service, status) {
+exports.createText = function (service, status, date) {
   let text = ''
-  const date = dayjs()
   if (status === 200) {
     text = `${service.toUpperCase()} est fonctionnelle ! 🚀`
   } else {
     text = `${service.toUpperCase()} a un problème ! 🐛`
   }
-  text += `\n\nStatut ${status} ${date.format('à H:mm le DD/MM/YYYY')}`
+  text += `\n\nStatut ${status} ${dayjs(date).format('à H:mm le DD/MM/YYYY')}`
   return text
 }
 

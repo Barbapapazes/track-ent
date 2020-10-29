@@ -32,10 +32,10 @@ exports.checkService = function (service) {
             } else {
               if (!lastStatus[service]) {
                 lastStatus[service] = doc.status
-                tweet(Twitter, createText(service, doc.status))
+                tweet(Twitter, createText(service, doc.status, doc.date))
               } else if (doc.status !== lastStatus[service]) {
                 lastStatus[service] = doc.status
-                tweet(Twitter, createText(service, doc.status))
+                tweet(Twitter, createText(service, doc.status, doc.date))
               }
             }
           }
