@@ -13,4 +13,7 @@ COPY . .
 
 EXPOSE 3000
 
+# set the correct timezone for date
+RUN apk add tzdata && cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo "Europe/Paris" > /etc/timezone && apk del tzdata
+
 CMD ["npm", "run", "start:docker"]
