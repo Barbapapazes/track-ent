@@ -7,6 +7,16 @@ services:
     env_file: ./server/.env
     volumes:
       - track-ent-data:/data
+  bot:
+    build: ./bot
+    env_file: ./bot/.env
+    ports: 
+      - 4000:4000
+  cron:
+    build: ./cron
+    env_file: ./cron/.env
+    depends_on: 
+      - backend
   front:
     build: ./client
     ports: 

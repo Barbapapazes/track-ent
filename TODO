@@ -1,0 +1,15 @@
+il faut split le code plus en séparant la partie qui est en mesure de répondre au dm, voir la mettre dans un autre container et elle fera des call api qui ne sort pas du réseau des containers
+
+ajouter un logger et monter un volume pour savoir ce qui s'y passe et pouvoir récupérer les phrases et les mettre sur le model
+
+front: visualisation de la data, nuxtjs et des call à l'api et chartjs pour la visualisation de la data
+
+cron: script qui fetch de la data et la push dans la db (en passant par l'api), node-schedule et node-fetch
+
+serer: donne la data, express et nedb (parce que c'est simple mais efficace !) faire une database pour les derniers éléments, pratique pour le restart ou alors on fait un Map en récupérant les 3 dernières
+
+[x] bot: publie les messages sur twitter (c'est un service, donc un server, on lui envoie une requ)
+
+bot_md: réponds au dm (on va voir plus tard)
+
+chaque service dans un container et le tout avec compose (objectif: permettre la modification super simple des containers et ne pas redémarrer des services inutilement)
