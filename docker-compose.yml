@@ -2,6 +2,7 @@ version: "3.8"
 services: 
   backend:
     build: ./server
+    image: track-ent_backend:${TAG}
     ports:
       - 5000:5000
     env_file: ./server/.env
@@ -9,16 +10,19 @@ services:
       - track-ent-data:/data
   bot:
     build: ./bot
+    image: track-ent_bot:${TAG}
     env_file: ./bot/.env
     ports: 
       - 4000:4000
   cron:
     build: ./cron
     env_file: ./cron/.env
+    image: track-ent_cron:${TAG}
     depends_on: 
       - backend
   front:
     build: ./client
+    image: track-ent_front:${TAG}
     ports: 
       - 3000:3000
     env_file: ./client/.env

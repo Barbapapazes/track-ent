@@ -19,13 +19,17 @@ Le serveur met en place une API pour recevoir et donner accès à de la data. Il
 - [Docker](https://www.docker.com/)
 - [Compose](https://docs.docker.com/compose/)
 
+### Env
+
+Créer un fichier `.env` à partir du `.env.local` pour gérer les tags.
+
 ### Utilisation de Compose
 
 ```bash
 # construit les images des services du .yml
-$ docker-compose build
+$ docker-compose --env-file .env build
 # crée et (re)démarre les conteneurs des services du .yml
-$ docker-compose up
+$ docker-compose --env-file .env up
 # met en pause les conteneurs des services du .yml
 $ docker-compose stop
 # arrête et détruit les conteneurs des services du .yml
