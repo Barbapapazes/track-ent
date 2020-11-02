@@ -1,13 +1,5 @@
-const Twit = require('twit')
 const { Autohook } = require('twitter-autohook')
 const { sendResponse } = require('./utils')
-
-const Twitter = new Twit({
-  consumer_key: process.env.CONSUMER_KEY,
-  consumer_secret: process.env.CONSUMER_SECRET,
-  access_token: process.env.ACCESS_TOKEN,
-  access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-})
 
 /**
  * Start the webhook to open the response of the bot
@@ -50,6 +42,3 @@ async function startBot(services, dbs) {
     process.exit(1)
   }
 }
-
-exports.startBot = startBot
-exports.Twitter = Twitter

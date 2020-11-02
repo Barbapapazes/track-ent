@@ -1,6 +1,15 @@
 # Track ENT, client et server
 
-> Outils de capture, de visualisation et de communication de l'état des services de l'ENT !
+> Outils de capture, de stockage, de visualisation et de communication de l'état des services de l'ENT !
+
+## Fonctionnement
+
+Le serveur met en place une API pour recevoir et donner accès à de la data. Il gère aussi les bases de données. Le client permet de visualiser la data qui se trouve dans la base de données. Cron permet de réaliser des tâches à temps régulier comme regarder le fonctionnement des services ou la création de tweet. Bot permet de réaliser des tweets via une API, en lui envoyant un peut de data sur le endpoint.
+
+- cron: capture
+- server: stockage
+- client: visualisation
+- bot: communication
 
 ## Build Setup
 

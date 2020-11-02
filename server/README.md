@@ -1,8 +1,8 @@
 # Track ENT
 
-> Pour capturer et communiquer quand les services de l'ENT sont UP ! 👀
+> Pour stocker quand les services de l'ENT sont UP ! 👀
 
-Le serveur effectue la capture du statut des services en utilisant une requête à chaque URL. Si ce dernier change, alors le serveur tweet l'état du service.
+Le serveur permet de stocker en base de données les informations sur le statut des services.
 
 ## Build Setup
 
@@ -15,10 +15,6 @@ Le serveur effectue la capture du statut des services en utilisant une requête 
 ### Env
 
 Copier 2 fois le fichier `.env.local` et les renommer `.env` et `.env.dev` et les compléter en fonction du mode, prod ou dev.
-
-### Bot
-
-Le bot twitter n'est pas actif en développement. Ses tweets sont simplement affichés dans la console.
 
 ### Utilisation manuelle
 
