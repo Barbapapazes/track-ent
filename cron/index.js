@@ -1,5 +1,6 @@
 const path = require('path')
 const envFilename = process.env.NODE_ENV === 'production' ? '.env' : '.env.dev'
+require('dotenv').config({ path: path.resolve(process.cwd(), envFilename) })
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 
