@@ -1,9 +1,9 @@
 <template>
-  <div class="container mx-auto">
+  <div>
     <line-chart :chart-data="datacollection" :options="options"></line-chart>
-    <div class="flex justify-end">
+    <div class="flex justify-center">
       <button
-        class="p-2 text-lg rounded bg-purple-300 text-purple-800 uppercase tracking-wide font-bold"
+        class="p-2 text-lg rounded hover:bg-blue-300 border border-blue-300 hover:text-gray-900 text-blue-300 uppercase tracking-wide font-bold transition duration-200 ease-in-out"
         @click="refresh()"
       >
         refresh
@@ -33,6 +33,49 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                color: '#666666',
+              },
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Temps',
+                fontColor: '#ffffff',
+                fontSize: 12,
+              },
+              ticks: {
+                fontColor: 'white',
+                fontSize: 10,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                color: '#666666',
+              },
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "Codes d'erreur",
+                fontColor: '#ffffff',
+                fontSize: 12,
+              },
+              ticks: {
+                fontColor: 'white',
+                fontSize: 10,
+              },
+            },
+          ],
+        },
+        legend: {
+          labels: {
+            fontColor: 'white',
+          },
+        },
       },
     }
   },
@@ -40,8 +83,8 @@ export default {
     dates() {
       const data = this.data
       return data.map((obj) => {
-        const date = new Date(obj.date)
-        return date.toLocaleString()
+        const date = this.$dayjs(obj.date)
+        return date.format('dddd DD MMMM YYYY à hh:MM')
       })
     },
     status() {

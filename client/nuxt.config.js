@@ -1,6 +1,6 @@
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
-  ssr: false,
+  ssr: true,
 
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'server',
@@ -37,10 +37,19 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // https://github.com/nuxt-community/dayjs-module
+    '@nuxtjs/dayjs',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
+
+  // Dayjs module configuration (https://github.com/nuxt-community/dayjs-module)
+  dayjs: {
+    locales: ['fr'],
+    defaultLocale: 'fr',
+    plugins: [],
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
