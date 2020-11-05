@@ -1,5 +1,5 @@
 <template>
-  <div class="box-border bg-gray-900 min-h-screen">
+  <div class="bg-blue-100 box-border min-h-screen">
     <Nuxt />
   </div>
 </template>

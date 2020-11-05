@@ -1,20 +1,10 @@
 <template>
-  <div>
-    <line-chart :chart-data="datacollection" :options="options"></line-chart>
-    <!-- <div class="flex justify-center">
-      <button
-        class="p-2 text-lg rounded hover:bg-blue-300 border border-blue-300 hover:text-gray-900 text-blue-300 uppercase tracking-wide font-bold transition duration-200 ease-in-out"
-        @click="refresh()"
-      >
-        refresh
-      </button>
-    </div> -->
-  </div>
+  <line-chart :chart-data="datacollection" :options="options"></line-chart>
 </template>
 
 <script>
 export default {
-  name: 'StatusChart',
+  name: 'PreviewChart',
   props: {
     service: {
       type: String,
@@ -33,6 +23,9 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        tooltips: {
+          enabled: false,
+        },
         scales: {
           xAxes: [
             {
@@ -40,12 +33,7 @@ export default {
                 color: '#666666',
               },
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Temps',
-                fontColor: '#ffffff',
-                fontSize: 12,
-              },
+
               ticks: {
                 fontColor: 'white',
                 fontSize: 10,
@@ -58,13 +46,9 @@ export default {
                 color: '#666666',
               },
               display: true,
-              scaleLabel: {
-                display: true,
-                labelString: "Codes d'erreur",
-                fontColor: '#ffffff',
-                fontSize: 12,
-              },
+
               ticks: {
+                stepSize: 1,
                 fontColor: 'white',
                 fontSize: 10,
               },
@@ -72,9 +56,7 @@ export default {
           ],
         },
         legend: {
-          labels: {
-            fontColor: 'white',
-          },
+          display: false,
         },
       },
     }
@@ -84,7 +66,7 @@ export default {
       const data = this.data
       return data.map((obj) => {
         const date = this.$dayjs(obj.date)
-        return date.format('dddd DD MMMM YYYY à hh:MM')
+        return date.format('DD/MM/YYYY')
       })
     },
     status() {
@@ -108,12 +90,11 @@ export default {
         labels: this.dates,
         datasets: [
           {
-            label: `Status codes from ${this.service}`,
             borderColor: this.colors,
             backgroundColor: this.colors,
             fill: true,
             pointRadius: 3,
-            pointHoverRadius: 8,
+            pointHoverRadius: 3,
             showLine: false,
             data: this.status,
           },
