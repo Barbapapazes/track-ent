@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="p-2 md:p-4">
     <Card>
       <StatusChart slot="body" :service="getService"></StatusChart>
     </Card>
