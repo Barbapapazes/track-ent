@@ -1,9 +1,7 @@
 <template>
-  <div class="p-2 md:p-4">
-    <Card>
-      <StatusChart slot="body" :service="getService"></StatusChart>
-    </Card>
-  </div>
+  <Card>
+    <StatusChart slot="body" :service="getService"></StatusChart>
+  </Card>
 </template>
 
 <script>

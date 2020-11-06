@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-w-4xl m-auto"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-w-screen-lg m-auto"
   >
     <template v-for="tracker in trackers">
       <Card :key="tracker">
@@ -12,7 +12,7 @@
         ></PreviewChart>
         <div slot="actions" class="flex justify-end">
           <CustomButton class="uppercase font-semibold">
-            <NuxtLink :to="`/trackers/${tracker}`">voir</NuxtLink>
+            <NuxtLink :to="`/trackers/${tracker}`">voir plus</NuxtLink>
           </CustomButton>
         </div>
       </Card>

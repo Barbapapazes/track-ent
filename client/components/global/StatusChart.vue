@@ -60,7 +60,7 @@ export default {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: "Codes d'erreur",
+                labelString: 'Codes HTTP',
                 fontColor: '#ffffff',
                 fontSize: 12,
               },
