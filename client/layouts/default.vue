@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-blue-100">
+  <div class="min-h-screen pattern bg-blue-100">
     <Header>
       <h1 slot="title" class="uppercase font-bold">
         <NuxtLink to="/"> track ent services </NuxtLink>
@@ -10,3 +10,9 @@
     </main>
   </div>
 </template>
+
+<style scoped>
+.pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%2354c2e1' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+</style>
